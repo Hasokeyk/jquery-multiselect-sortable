@@ -1,0 +1,77 @@
+.multiselect_sortable_hide{
+    position : absolute;
+    top      : -9999999px;
+}
+.mulltiselect_sortable_content{
+    float     : left;
+    width     : 100%;
+    max-width : 500px;
+}
+.selection{
+    float  : left;
+    width  : calc(50% - 20px);
+    margin : 10px;
+}
+.selection .selection_title{
+    float : left;
+    width : 100%;
+}
+.selection .selection_content{
+    float         : left;
+    width         : 100%;
+    height        : 300px;
+    border        : 1px solid #eeeeee;
+    border-radius : 5px;
+    overflow-y    : scroll;
+    overflow-x    : hidden;
+    margin        : 0;
+    padding       : 0;
+    box-sizing    : border-box;
+}
+.selection .selection_content li{
+    float         : left;
+    width         : 100%;
+    padding       : 10px;
+    border-bottom : 1px solid #eeeeee;
+    list-style    : none;
+    box-sizing    : border-box;
+}
+.selection .selection_content li.disabled{
+    opacity: 0.5;
+    background: #f7f7f7;
+    pointer-events: none;
+}
+.selectable{
+    float  : left;
+    width  : calc(50% - 20px);
+    margin : 10px;
+}
+.selectable .selectable_title{
+    float : left;
+    width : 100%;
+}
+.selectable .selectable_content{
+    float         : left;
+    width         : 100%;
+    height        : 300px;
+    border        : 1px solid #eeeeee;
+    border-radius : 5px;
+    overflow-y    : scroll;
+    overflow-x    : hidden;
+    margin        : 0;
+    padding       : 0;
+    box-sizing    : border-box;
+}
+.selectable .selectable_content li{
+    float         : left;
+    width         : 100%;
+    padding       : 10px;
+    border-bottom : 1px solid #eeeeee;
+    list-style    : none;
+    box-sizing    : border-box;
+}
+.selectable .selectable_content li.disabled{
+    opacity: 0.5;
+    background: #f7f7f7;
+    pointer-events: none;
+}
