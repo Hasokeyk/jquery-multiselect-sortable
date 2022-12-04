@@ -13,14 +13,24 @@
     <link rel="stylesheet" href="assets/css/jquery.multiselect.sortable.js.css">
     <script>
         jQuery(function($){
-            $('.multiselectsortable').multiselect_sortable();
-            
-            $('.submit_btn').on('click',function(){
+            $('.multiselectsortable').multiselect_sortable({
+                selectable:{
+                    title   :'a',
+                    sortable:true
+                },
+                selection :{
+                    title   :'b',
+                    sortable:true
+                },
+                reverse   :true
+            });
+
+            $('.submit_btn').on('click', function(){
                 var a = $('.hasan').val()
                 console.log(a)
                 return false;
             })
-            
+
         })
     </script>
 </head>
@@ -31,7 +41,7 @@
 ?>
 
 <form action="" method="post">
-    <select name="multiselectsortable" class="multiselectsortable hasan" multiple>
+    <select name="multiselectsortable" class="multiselectsortable hasan" data-hasan_deneme="123" data-murat-deneme="asd" multiple>
         <option value="1" selected data-deneme="deneme" disabled>ID</option>
         <option value="2" selected disabled>Username</option>
         <option value="3" disabled>3</option>

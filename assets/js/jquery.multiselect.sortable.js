@@ -12,11 +12,14 @@
 
         var defaults = {
             selectable:{
-                title:'Selectable'
+                title   :'Selectable',
+                sortable:true
             },
             selection :{
-                title:'Selection'
-            }
+                title   :'Selection',
+                sortable:true
+            },
+            reverse   :false
         };
 
         var me = this;
@@ -29,6 +32,11 @@
         select.setAttribute('name', select_name+'[]');
         select.setAttribute('class', classes);
         select.setAttribute('style', "display:none");
+
+        var select_data = $(me).data();
+        $.each(select_data, function(i, e){
+            select.setAttribute('data-'+i, e);
+        })
 
         var settings = $.extend(true, defaults, options);
         var parent   = this.parent();
@@ -63,15 +71,16 @@
             }
         });
 
-        var content = `
+        if(defaults.reverse==false){
+            var content = `
             <div class="multiselect_sortable_content">
-                <div class="selection">
+                <div class="multiselect_sortable_content_selection">
                     <div class="selection_title">${settings.selection.title}</div>
                     <ul class="selection_content sortable">
                         ${selection}
                     </ul>
                 </div>
-                <div class="selectable">
+                <div class="multiselect_sortable_content_selectable">
                     <div class="selectable_title">${settings.selectable.title}</div>
                     <ul class="selectable_content">
                         ${selectable}
@@ -79,36 +88,58 @@
                 </div>
             </div>
         `;
+        }
+        else{
+            var content = `
+            <div class="multiselect_sortable_content">
+                <div class="multiselect_sortable_content_selectable">
+                    <div class="selectable_title">${settings.selectable.title}</div>
+                    <ul class="selectable_content">
+                        ${selectable}
+                    </ul>
+                </div>
+                <div class="multiselect_sortable_content_selection">
+                    <div class="selection_title">${settings.selection.title}</div>
+                    <ul class="selection_content sortable">
+                        ${selection}
+                    </ul>
+                </div>
+            </div>
+        `;
+        }
+
 
         $(parent).append(content)
 
-        $(document).on('click', '.selectable_content .select_li', function(){
+        $(document).on('click', '.selectable_content .select_li:not(.disabled)', function(){
             const html = $(this)[0].outerHTML;
             $('.selection_content').append(html);
             $(this).remove();
             sortable_selectbox();
         });
 
-        $(document).on('click', '.selection_content .select_li', function(){
+        $(document).on('click', '.selection_content .select_li:not(.disabled)', function(){
             var html = $(this)[0].outerHTML;
             $('.selectable_content').append(html);
             $(this).remove();
             sortable_selectbox();
         });
 
-        $(".sortable").sortable({
-            connectWith:"ul",
-            axis       :'y',
-            start      :function(e){
-                sortable_selectbox();
-            },
-            change     :function(e){
-                sortable_selectbox();
-            },
-            update     :function(e){
-                sortable_selectbox();
-            },
-        });
+        if(defaults.selectable.sortable==true){
+            $(".sortable").sortable({
+                connectWith:"ul",
+                axis       :'y',
+                start      :function(e){
+                    sortable_selectbox();
+                },
+                change     :function(e){
+                    sortable_selectbox();
+                },
+                update     :function(e){
+                    sortable_selectbox();
+                },
+            });
+        }
 
         sortable_selectbox();
 
